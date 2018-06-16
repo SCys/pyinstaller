@@ -1,5 +1,5 @@
-PyInstaller Alpine
-==================
+PyInstaller
+===
 
 Docker image that can build single file Python apps with
 [PyInstaller](http://pyinstaller.readthedocs.io/) for
