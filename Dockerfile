@@ -1,5 +1,5 @@
 # Official Python base image is needed or some applications will segfault.
-FROM python:3-alpine
+FROM python:3
 
 # PyInstaller needs zlib-dev, gcc, libc-dev, and musl-dev
 RUN apk --update --no-cache add \
