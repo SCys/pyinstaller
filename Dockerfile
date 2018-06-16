@@ -1,20 +1,19 @@
 # Official Python base image is needed or some applications will segfault.
 FROM python:3
 
-# PyInstaller needs zlib-dev, gcc, libc-dev, and musl-dev
-RUN apk --update --no-cache add \
-    zlib-dev \
-    musl-dev \
-    libc-dev \
-    gcc \
-    git \
-    pwgen \
-    && pip install --upgrade pip
+RUN set -x \
+    && apt-get update -qy \
+    && apt-get install --no-install-recommends -qfy \
+        zlib-dev \
+        musl-dev \
+        libc-dev \
+        gcc \
+        pwgen \
+        git \
+    && apt-get clean
 
-# Install pycrypto so --key can be used with PyInstaller
 RUN pip install pycrypto
 
-# Build bootloader for alpine
 RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
     && cd /tmp/pyinstaller/bootloader \
     && python ./waf configure --no-lsb all \
