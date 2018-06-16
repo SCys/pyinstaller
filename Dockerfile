@@ -4,9 +4,9 @@ FROM python:3
 RUN set -x \
     && apt-get update -qy \
     && apt-get install --no-install-recommends -qfy \
-        zlib-dev \
+        zlib1g-dev \
         musl-dev \
-        libc-dev \
+        libc-dev-bin \
         gcc \
         pwgen \
         git \
