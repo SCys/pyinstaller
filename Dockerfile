@@ -41,4 +41,4 @@ WORKDIR /src
 ADD ./bin /pyinstaller
 RUN chmod a+x /pyinstaller/*
 
-# ENTRYPOINT ["/pyinstaller/pyinstaller.sh"]
+ENTRYPOINT ["/pyinstaller/pyinstaller.sh"]
