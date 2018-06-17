@@ -9,6 +9,7 @@ RUN sh /usr/local/bin/use_chinese_cdn.sh
 RUN apt update -qy \
     && apt install --no-install-recommends -qfy \
         python3-dev python3 python3-pip \
+        libmagic \
         zlib1g-dev \
         musl-dev \
         libc-dev-bin \
