@@ -1,19 +1,34 @@
 # Official Python base image is needed or some applications will segfault.
-FROM python:3.6-alpine
+FROM alpine:3.7
 
-# PyInstaller needs zlib-dev, gcc, libc-dev, and musl-dev
+# Check chinese CDN mirror
+RUN apk --update --no-cache add curl
+RUN curl -s iscys.com | grep -q -i china && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+
+RUN apk -U --no-cache add python3-dev python3 alpine-sdk 
+
+RUN python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --upgrade pip setuptools && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
+    rm -r /root/.cache
+
 RUN apk --update --no-cache add \
     zlib-dev \
     musl-dev \
     libc-dev \
+    libffi-dev \
+    postgresql-dev \
     gcc \
+    g++ \
     git \
     pwgen \
     && pip install --upgrade pip
 
 RUN pip install pycrypto
-
-# Build bootloader for alpine
+# RUN pip install git+https://github.com/pyinstaller/pyinstaller.git
 RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
     && cd /tmp/pyinstaller/bootloader \
     && python ./waf configure --no-lsb all \
@@ -26,4 +41,4 @@ WORKDIR /src
 ADD ./bin /pyinstaller
 RUN chmod a+x /pyinstaller/*
 
-ENTRYPOINT ["/pyinstaller/pyinstaller.sh"]
+# ENTRYPOINT ["/pyinstaller/pyinstaller.sh"]
