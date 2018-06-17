@@ -16,6 +16,7 @@ RUN python3 -m ensurepip && \
     rm -r /root/.cache
 
 RUN apk --update --no-cache add \
+    libmagic \
     zlib-dev \
     musl-dev \
     libc-dev \
