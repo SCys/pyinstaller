@@ -3,8 +3,8 @@ FROM alpine:3.7
 
 # Check chinese CDN mirror
 RUN apk --update --no-cache add curl
-RUN curl -s iscys.com | grep -q -i china && \
-    sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN "curl -s iscys.com | grep -q -i china && \
+    sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories"
 
 RUN apk -U --no-cache add python3-dev python3 alpine-sdk 
 
