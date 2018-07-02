@@ -28,7 +28,7 @@ RUN apk --update --no-cache add \
     pwgen \
     && pip install --upgrade pip
 
-RUN pip install pycrypto
+RUN pip install -U pycrypto setuptools
 # RUN pip install git+https://github.com/pyinstaller/pyinstaller.git
 RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
     && cd /tmp/pyinstaller/bootloader \
