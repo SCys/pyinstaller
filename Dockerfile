@@ -27,6 +27,7 @@ RUN apk --update --no-cache add \
     git \
     pwgen \
     upx \
+    curl \
     && pip install --upgrade pip
 
 RUN pip install -U pycrypto
