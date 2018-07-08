@@ -20,7 +20,7 @@ RUN apt update -qy \
         g++ \
         pwgen \
         git \
-        curl \
+        libcurl4-openssl-dev \
     && apt clean
 
 RUN pip3 install --upgrade pip setuptools && \
