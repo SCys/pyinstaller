@@ -20,6 +20,7 @@ RUN apt update -qy \
         g++ \
         pwgen \
         git \
+        curl \
     && apt clean
 
 RUN pip3 install --upgrade pip setuptools && \
