@@ -12,6 +12,7 @@ RUN apt update -qy \
         libmagic-dev \
         zlib1g-dev \
         musl-dev \
+        libssl-dev \
         libc-dev-bin \
         libffi-dev \
         libpq-dev \
