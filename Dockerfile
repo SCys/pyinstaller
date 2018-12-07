@@ -18,6 +18,7 @@ RUN apt update -qy \
         libc-dev-bin \
         libffi-dev \
         libpq-dev \
+        libsnappy-dev \
         build-essential \
         gcc \
         g++ \
