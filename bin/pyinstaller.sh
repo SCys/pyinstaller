@@ -12,7 +12,7 @@ PATH="/pyinstaller:$PATH"
 
 # Optmize chinese mirror
 pip_args=""
-IN_CHINA=`curl -s iscys.com | grep -q -i china && echo true || echo false`
+IN_CHINA=`curl -s https://api.ip.sb/geoip/ | grep -q -i china && echo true || echo false`
 if [ "$IN_CHINA" == "true" ]; then 
     pip_args="-i https://pypi.douban.com/simple/"
     echo "Use china mirror:https://pypi.douban.com/simple/"
