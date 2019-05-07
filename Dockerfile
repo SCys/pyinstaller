@@ -8,7 +8,9 @@ RUN sh /usr/local/bin/use_chinese_cdn.sh
 
 RUN apt update -qy \
     && apt install --no-install-recommends -qfy \
-        python3-dev python3 python3-pip \
+        python3.7 \
+        python3.7-dev \
+        python3.7-distutils \
         libmagic-dev \
         zlib1g-dev \
         musl-dev \
@@ -16,6 +18,7 @@ RUN apt update -qy \
         libc-dev-bin \
         libffi-dev \
         libpq-dev \
+        libsnappy-dev \
         build-essential \
         gcc \
         g++ \
@@ -25,18 +28,17 @@ RUN apt update -qy \
         libcurl4-openssl-dev \
     && apt clean
 
-RUN pip3 install --upgrade pip setuptools && \
-    ln -s pip3 /usr/bin/pip && \
-    ln -sf /usr/bin/python3 /usr/bin/python && \
-    rm -r /root/.cache
+RUN ln -sf /usr/bin/python3.7 /usr/bin/python && \
+    curl https://bootstrap.pypa.io/get-pip.py | python && \
+    pip install --upgrade pip setuptools
 
-RUN pip install pycrypto
+RUN pip install PyCrypto
 
-RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
-    && cd /tmp/pyinstaller/bootloader \
-    && python3 ./waf configure --no-lsb all \
-    && pip3 install .. \
-    && rm -Rf /tmp/pyinstaller
+RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller && \
+    cd /tmp/pyinstaller/bootloader && \
+    python ./waf configure --no-lsb all && \
+    pip install .. && \
+    rm -Rf /tmp/pyinstaller
 
 VOLUME /src
 WORKDIR /src
