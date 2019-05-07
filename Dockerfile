@@ -21,6 +21,7 @@ RUN apt update -qy \
         g++ \
         pwgen \
         git \
+        libsnappy-dev \
         libcurl4-openssl-dev \
     && apt clean
 
