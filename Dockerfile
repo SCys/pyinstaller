@@ -1,5 +1,5 @@
 # Official Python base image is needed or some applications will segfault.
-FROM debian:sid-slim
+FROM debian:buster
 
 # Check chinese CDN mirror
 RUN apt update -qy && apt install -qfy curl
