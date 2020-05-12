@@ -1,5 +1,5 @@
 # Official Python base image is needed or some applications will segfault.
-FROM debian:buster
+FROM python:3.8-buster
 
 # Check chinese CDN mirror
 RUN apt update -qy && apt install -qfy curl
@@ -8,9 +8,6 @@ RUN sh /usr/local/bin/use_chinese_cdn.sh
 
 RUN apt update -qy \
     && apt install --no-install-recommends -qfy \
-        python3.7 \
-        python3.7-dev \
-        python3.7-distutils \
         libmagic-dev \
         zlib1g-dev \
         musl-dev \
@@ -28,12 +25,7 @@ RUN apt update -qy \
         libcurl4-openssl-dev \
     && apt clean
 
-RUN ln -sf /usr/bin/python3.7 /usr/bin/python && \
-    curl https://bootstrap.pypa.io/get-pip.py | python && \
-    pip install --upgrade pip setuptools
-
-RUN pip install PyCrypto
-
+RUN pip install --upgrade pip setuptools && pip install PyCrypto
 RUN git clone --depth 1 --single-branch https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller && \
     cd /tmp/pyinstaller/bootloader && \
     python ./waf configure --no-lsb all && \
