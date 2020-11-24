@@ -1,5 +1,5 @@
 # Official Python base image is needed or some applications will segfault.
-FROM python:3.8-buster
+FROM python:3.9-buster
 
 # Check chinese CDN mirror
 ADD use_chinese_cdn.sh /usr/local/bin
