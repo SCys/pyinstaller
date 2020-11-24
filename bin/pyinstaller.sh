@@ -3,6 +3,8 @@
 
 set -e
 
+bash /usr/local/bin/use_chinese_cdn.sh
+
 # Generate a random key for encryption
 random_key=$(pwgen -s 16 1)
 pyinstaller_args="${@/--random-key/--key $random_key}"

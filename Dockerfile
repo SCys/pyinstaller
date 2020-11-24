@@ -3,7 +3,7 @@ FROM python:3.9-buster
 
 # Check chinese CDN mirror
 ADD use_chinese_cdn.sh /usr/local/bin
-RUN bash /usr/local/bin/use_chinese_cdn.sh
+# RUN bash /usr/local/bin/use_chinese_cdn.sh
 
 RUN apt-get update -qq -y \
     && apt-get install --no-install-recommends -qq -f -y \
